@@ -66,7 +66,7 @@ daily_steps <- aggregate(activity_norm$steps, by=list(date=activity_norm$date), 
 colnames(daily_steps) <- c("date", "steps")
 daily_steps$date <- as.Date(daily_steps$date, format="%Y-%m-%d")
 
-# Make a histogram of the total number of steps taken each day
+# Make a daily information about the total number of steps taken each day
 g <- ggplot(daily_steps, aes(x=date, y=steps, width=0.85))
 g <- g + geom_bar(stat="identity")
 g <- g + xlab("Date") + ylab("Total number of steps taken each day")
@@ -74,6 +74,16 @@ plot(g)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+
+```r
+# Make a histogram of the total number of steps taken each day
+g <- ggplot(daily_steps, aes(x=steps)) 
+g <- g + geom_histogram(binwidth=1000)
+g <- g + xlab("Total number of steps taken each day")
+plot(g)
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-2-2.png)<!-- -->
 
 The mean and median of the total number of steps taken per day can be obtained as follows.
 
@@ -198,9 +208,9 @@ imputed_daily_steps <- aggregate(imputed_activity$steps, by=list(date=imputed_ac
 colnames(imputed_daily_steps) <- c("date", "steps")
 imputed_daily_steps$date <- as.Date(imputed_daily_steps$date, format="%Y-%m-%d")
 
-g <- ggplot(imputed_daily_steps, aes(x=date, y=steps, width=0.85))
-g <- g + geom_bar(stat="identity")
-g <- g + xlab("Date") + ylab("Total number of steps taken each day (imputed)")
+g <- ggplot(imputed_daily_steps, aes(x=steps)) 
+g <- g + geom_histogram(binwidth=1000)
+g <- g + xlab("Total number of steps taken each day")
 plot(g)
 ```
 
